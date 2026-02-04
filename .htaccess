@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /delivery/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^categoria-(.*)$ itens.php?url=$1 [L]
+RewriteRule ^produto-(.*)$ variacoes.php?url=$1 [L]
+RewriteRule ^adicional-(.*)$ adicionais.php?url=$1&item=$2 [L]
+RewriteRule ^observacoes-(.*)$ observacoes.php?url=$1&item=$2 [L]
+RewriteRule ^carrinho(.*)$ carrinho.php [L]
+RewriteRule ^finalizar(.*)$ finalizar.php [L]
+RewriteRule ^index(.*)$ index.php [L]
+RewriteRule ^index.php(.*)$ index.php [L]
