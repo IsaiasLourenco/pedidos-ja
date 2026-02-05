@@ -279,6 +279,7 @@ $dataMesInicial = $partes_inicial[1];
                                 <ul class="treeview-menu">
                                     <li><a href="index.php?pagina=cargos"><i class="fa fa-angle-right"></i> Cargos</a></li>
                                     <li><a href="index.php?pagina=bairros"><i class="fa fa-angle-right"></i> Bairros</a></li>
+                                    <li><a href="index.php?pagina=dias"><i class="fa fa-angle-right"></i> Dias Fechados</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">

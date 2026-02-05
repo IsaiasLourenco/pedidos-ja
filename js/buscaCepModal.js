@@ -31,7 +31,7 @@
   }
 
   function formatCepDisplay(cepDigits) {
-    if (cepDigits.length === 8) return cepDigits.slice(0,5) + '-' + cepDigits.slice(5);
+    if (cepDigits.length === 8) return cepDigits.slice(0, 5) + '-' + cepDigits.slice(5);
     return cepDigits;
   }
 
@@ -44,7 +44,7 @@
     if (raw.length !== 8) {
       showCepMsg(cepEl, 'CEP inválido!');
       // limpa campos relacionados no mesmo contexto
-      ['rua','logradouro','bairro','cidade','estado','uf','cep'].forEach(k=>{
+      ['rua', 'logradouro', 'bairro', 'cidade', 'estado', 'uf', 'cep'].forEach(k => {
         const f = findFieldInContext(context, k, prefix);
         if (f) f.value = '';
       });
@@ -74,6 +74,10 @@
         const field = findFieldInContext(context, key, prefix);
         if (field) field.value = val;
       });
+
+      // 👇 ADICIONE ESTA LINHA AQUI 👇
+      const numeroField = findFieldInContext(context, 'numero', prefix);
+      if (numeroField) numeroField.value = '';
 
     } catch (err) {
       showCepMsg(cepEl, 'Erro ao consultar CEP.');

@@ -66,14 +66,52 @@ if ($total_reg > 0) {
     $valor_itemF = 'R$ ' . number_format($valor_item, 2, ',', '.');
 }
 
-$queryAd = $pdo->query("SELECT COUNT(*) as total FROM adicionais WHERE produto = '$id_produto'");
-$total_adicionais = $queryAd->fetch()['total'];
+$queryAd            = $pdo->query("SELECT COUNT(*) as total FROM adicionais WHERE produto = '$id_produto'");
+$total_adicionais   = $queryAd->fetch()['total'];
 
-$queryIng = $pdo->query("SELECT COUNT(*) as total FROM ingredientes WHERE produto = '$id_produto'");
+$queryIng           = $pdo->query("SELECT COUNT(*) as total FROM ingredientes WHERE produto = '$id_produto'");
 $total_ingredientes = $queryIng->fetch()['total'];
 
 $tem_adicionais_ou_ingredientes = ($total_adicionais > 0 || $total_ingredientes > 0);
 
+if ($aberto == "fechado") {
+    echo "<script>window.alert('$texto_fechamento')</script>";
+    echo "<script>window.location='index'</script>";
+    exit;
+}
+
+//Verificar se está aberto ou fechado
+$data               = date('Y-m-d');
+$diasSemana         = array("Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado");
+$diasSemana_numero  = date('w', strtotime($data));
+$dia_procurado      = $diasSemana[$diasSemana_numero];
+$query              = $pdo->query("SELECT * FROM dias WHERE dia = '$dia_procurado'");
+$res                = $query->fetchAll(PDO::FETCH_ASSOC);
+if (count($res) > 0) {
+    echo "<script>window.alert('$texto_fechamento')</script>";
+    echo "<script>window.location='index'</script>";
+    exit;
+}
+
+//Verificar horário de funcionamento
+$hora_atual = date('H:i:s');
+if (strtotime($fechamento) < strtotime($abertura)) {
+    if (strtotime($hora_atual) >= strtotime($abertura) || strtotime($hora_atual) <= strtotime($fechamento)) {
+        
+    } else {
+        echo "<script>window.alert('$texto_fechamento   ')</script>";
+        echo "<script>window.location='index'</script>";
+        exit;
+    }
+} else {
+    if (strtotime($hora_atual) >= strtotime($abertura) && strtotime($hora_atual) <= strtotime($fechamento)) {
+        
+    } else {
+        echo "<script>window.alert('$texto_fechamento')</script>";
+        echo "<script>window.location='index'</script>";
+        exit;
+    }
+}
 ?>
 
 <div class="main-container fundo mt-6">

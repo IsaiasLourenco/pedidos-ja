@@ -81,7 +81,12 @@ if ($total_reg == 0) {
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                    <button class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo"
+                        aria-expanded="false"
+                        id="colapse-2"
                         aria-controls="collapseTwo">
                         2 - MODO DE ENTREGA
                     </button>
@@ -135,69 +140,72 @@ if ($total_reg == 0) {
                         </div>
                         <div id="area-endereco">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-4 col-md-4">
+                                    <div class="grupo">
+                                        <input type="text"
+                                                class="entra"
+                                                name="cep"
+                                                id="cep-finalizar"
+                                                placeholder="CEP"
+                                                required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
+                                <div class="col-8 col-md-3">
                                     <div class="grupo">
                                         <input type="text"
                                             class="entra"
                                             name="rua"
                                             id="rua"
+                                            placeholder="Rua"
+                                            readonly
                                             required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
-                                        <label class="rotulo"><?php echo $rua_cliente ?></label>
                                     </div>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-3 col-md-1">
                                     <div class="grupo">
                                         <input type="text"
                                             class="entra"
                                             name="numero"
                                             id="numero"
+                                            placeholder="Nº"
                                             required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
-                                        <label class="rotulo"><?php echo $numero_cliente ?></label>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6 col-md-3">
                                     <div class="grupo">
                                         <input type="text"
                                             class="entra"
                                             name="cidade"
                                             id="cidade"
+                                            placeholder="Cidade"
+                                            readonly
                                             required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
-                                        <label class="rotulo"><?php echo $cidade_cliente ?></label>
                                     </div>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-3 col-md-1">
                                     <div class="grupo">
                                         <input type="text"
                                             class="entra"
                                             name="estado"
                                             id="estado"
+                                            placeholder="Estado"
+                                            readonly
                                             required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
-                                        <label class="rotulo"><?php echo $estado_cliente ?></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-8 col-md-5">
-                                    <div class="grupo">
-                                        <input type="text"
-                                            class="entra"
-                                            name="cep"
-                                            id="cep"
-                                            required>
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                                        <label class="rotulo"><?php echo $cep_cliente ?></label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-7">
+                                <div class="col-12 col-md-5">
                                     <div class="grupo">
                                         <select class="entra" name="bairro" id="bairro" required style="background: transparent;">
                                             <option value="0">Selecione um Bairro</option>
@@ -230,7 +238,13 @@ if ($total_reg == 0) {
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <button class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse4"
+                        aria-expanded="false"
+                        id="colapse-4"
+                        aria-controls="collapse4">
                         4 - PAGAMENTO
                     </button>
                 </h2>
@@ -276,13 +290,13 @@ if ($total_reg == 0) {
                                 <div class="col-7" class="mt-6">
                                     <div class="group">
                                         <input type="text"
-                                                class="entra placetroco"
-                                                name="numero"
-                                                id="troco"
-                                                placeholder="Vou precisar de troco para... R$ ?"
-                                                oninput="formatarMoedaReal(this)"
-                                                onfocus="removerFormatacao(this)"
-                                                required>
+                                            class="entra placetroco"
+                                            name="numero"
+                                            id="troco"
+                                            placeholder="Vou precisar de troco para... R$ ?"
+                                            oninput="formatarMoedaReal(this)"
+                                            onfocus="removerFormatacao(this)"
+                                            required>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label class="rotulo">Vou precisar de troco para... R$ ?</label>
@@ -309,7 +323,7 @@ if ($total_reg == 0) {
         <span>Previsão Entrega: <?php echo $previsao_entrega ?> minutos.</span><br>
     </div>
     <div class="direita">
-        <strong>TOTAL À PAGAR - <p id="total-carrinho-finalizar"><?php echo $valor_total_carrinhoF?></strong></p>
+        <strong>TOTAL À PAGAR - <p id="total-carrinho-finalizar"><?php echo $valor_total_carrinhoF ?></strong></p>
     </div>
     <div class="d-grid gap-2 mt-4 abaixo">
         <a href='#' onclick="finalizarPedido()" class="btn btn-primary botao-carrinho">Concluir Pedido</a>
@@ -323,6 +337,13 @@ if ($total_reg == 0) {
             document.getElementById('pagar_dinheiro').style.display = "none";
             document.getElementById('pagar_credito').style.display = "none";
             document.getElementById('pagar_debito').style.display = "none";
+
+            if ($('#rua').val() === '') $('#rua').val('<?php echo addslashes($rua_cliente); ?>');
+            if ($('#numero').val() === '') $('#numero').val('<?php echo addslashes($numero_cliente); ?>');
+            if ($('#cidade').val() === '') $('#cidade').val('<?php echo addslashes($cidade_cliente); ?>');
+            if ($('#estado').val() === '') $('#estado').val('<?php echo addslashes($estado_cliente); ?>');
+            if ($('#cep-finalizar').val() === '') $('#cep-finalizar').val('<?php echo addslashes($cep_cliente); ?>');
+            if ($('#bairro').val() === '') $('#bairro').val('<?php echo addslashes($id_bairro_cliente); ?>');
         });
 
         function retirar() {
@@ -414,6 +435,84 @@ if ($total_reg == 0) {
             input.value = input.value.replace(/\D/g, '');
         }
 
+        function finalizarPedido() {
+            var entrega         = $('#entrega').val();
+            var rua             = $('#rua').val();
+            var numero          = $('#numero').val();
+            var cidade          = $('#cidade').val();
+            var estado          = $('#estado').val();
+            var cep             = $('#cep-finalizar').val();
+            var bairro          = $('#bairro').val();
+            var pagamento       = $('#pagamento').val();
+            var troco           = $('#troco').val();
+            var total_compra    = <?php echo $valor_total_carrinho; ?>;
+
+            if (entrega == "") {
+                alert('Selecione uma forma de entrega!');
+                $('#colapse-2').click();
+                return;
+            }
+
+            if (entrega == "Delivery") {
+                // Verifica se a seção de endereço está aberta
+                var enderecoAberto = $('#collapseThree').hasClass('show');
+
+                if (cep.trim() === "") {
+                    alert('Preencha o campo cep para a entrega!');
+                    if (!enderecoAberto) $('#colapse-3').click();
+                    setTimeout(() => $('#cep-finalizar').focus(), 300);
+                    return;
+                }
+                if (rua.trim() === "") {
+                    alert('Preencha o nome da rua para a entrega!');
+                    if (!enderecoAberto) $('#colapse-3').click(); // ← abre só se necessário
+                    setTimeout(() => $('#rua').focus(), 300); // ← foco após animação
+                    return;
+                }
+                if (numero.trim() === "") {
+                    alert('Preencha o nº da casa para a entrega!');
+                    if (!enderecoAberto) $('#colapse-3').click();
+                    setTimeout(() => $('#numero').focus(), 300);
+                    return;
+                }
+                if (cidade.trim() === "") {
+                    alert('Preencha o campo cidade para a entrega!');
+                    if (!enderecoAberto) $('#colapse-3').click();
+                    setTimeout(() => $('#cidade').focus(), 300);
+                    return;
+                }
+                if (estado.trim() === "") {
+                    alert('Preencha o campo estado para a entrega!');
+                    if (!enderecoAberto) $('#colapse-3').click();
+                    setTimeout(() => $('#estado').focus(), 300);
+                    return;
+                }
+                if (bairro == "0") {
+                    alert('Preencha o campo bairro para a entrega!');
+                    if (!enderecoAberto) $('#colapse-3').click();
+                    setTimeout(() => $('#bairro').focus(), 300);
+                    return;
+                }
+            }
+
+            if (pagamento == "") {
+                alert('Selecione uma forma de pagamento!');
+                $('#colapse-4').click();
+                return;
+            }
+            if (pagamento == "Dinheiro" && troco === "") {
+                alert('Digite o total a ser pago, para o troco!');
+                $('#troco').focus();
+                return;
+            }
+            var trocoNumerico = parseFloat(troco.replace(/\D/g, '')) / 100;
+            if (trocoNumerico < total_compra) {
+                alert('Digite um valor acima do total da compra!');
+                $('#troco').val("");
+                $('#troco').focus();
+                return;
+            }
+        }
     </script>
 </body>
 
