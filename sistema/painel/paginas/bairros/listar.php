@@ -20,31 +20,33 @@ if ($total > 0) {
 HTML;
 
     for ($i = 0; $i < $total; $i++) {
-        foreach ($res[$i] as $key => $value) {
-        }
         $id = $res[$i]['id'];
         $nome = $res[$i]['nome'];
         $valor = $res[$i]['valor'];
-
+        $status = $res[$i]['status'];
+        if ($status == 'pendente') {
+            $nome = "<span class='text-danger'>$nome</span> <i class='fa fa-clock-o text-warning' title='Aguardando definição de valor'></i>";
+        }
         $valor_formatado = "R$ " . number_format($valor, 2, ',', '.');
+        $classe_nome = ($status == 'pendente') ? 'text-danger' : '';
 
         echo <<<HTML
 <tr>
-    <td class="centro">{$nome}</td>
-    <td class="centro">{$valor_formatado}</td>
+    <td class="centro"><span class="$classe_nome">$nome</span></td>
+    <td class="centro">$valor_formatado</td>
     <td class="centro">
-        <a onclick="editar( '{$id}',
-                            '{$nome}', 
-                            '{$valor_formatado}',)", title="Editar Registro">
+        <a onclick="editar('{$id}', '{$res[$i]['nome']}', '{$valor_formatado}')" title="Editar Registro">
             <i class="fa fa-edit text-primary pointer"></i>
         </a>
 
         <li class="dropdown head-dpdn2 d-il-b">
-            <a title="Excluir Registro" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-trash text-danger pointer"></i></a>
-            <ul class="dropdown-menu mg-l--150  ">
+            <a title="Excluir Registro" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-trash text-danger pointer"></i>
+            </a>
+            <ul class="dropdown-menu mg-l--150">
                 <li>
                     <div class="notification_desc2">
-                        <p>Confirmar Exclusão?<a href="#" onclick="excluir('{$id}')"><span class="text-danger"> Sim</span></a></p>
+                        <p>Confirmar Exclusão?<a href="#" onclick="excluir('$id')"><span class="text-danger"> Sim</span></a></p>
                     </div>
                 </li>
             </ul>

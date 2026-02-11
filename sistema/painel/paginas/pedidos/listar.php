@@ -69,20 +69,19 @@ $total_pedidos = @count($resPedidos);
 | Agora com JOIN em vendas_endereco + bairros
 |---------------------------------------------------------------------------
 */
-$query = $pdo->query("
-    SELECT v.*, 
-           ve.rua AS rua_entrega,
-           ve.numero AS numero_entrega,
-           b.nome AS bairro_entrega
-    FROM vendas v
-    LEFT JOIN vendas_endereco ve ON v.id = ve.venda_id
-    LEFT JOIN bairros b ON ve.bairro_id = b.id
-    WHERE v.data_pagamento = CURDATE()
-      AND v.status_venda LIKE '$status'
-      AND v.status_venda != 'Finalizado'
-      AND v.status_venda != 'Cancelado'
-    ORDER BY v.hora_pagamento ASC
-");
+$query = $pdo->query("SELECT v.*, ve.rua AS rua_entrega,ve.numero 
+                                         AS numero_entrega,b.nome AS bairro_entrega
+                                         FROM vendas v 
+                                         LEFT JOIN vendas_endereco ve 
+                                         ON v.id = ve.venda_id
+                                         LEFT JOIN bairros b 
+                                         ON ve.bairro_id = b.id 
+                                         WHERE v.data_pagamento = CURDATE()
+                                         AND v.status_venda 
+                                         LIKE '$status' 
+                                         AND v.status_venda != 'Finalizado'
+                                         AND v.status_venda != 'Cancelado'
+                                         ORDER BY v.hora_pagamento ASC");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $total_reg = @count($res);
 
@@ -108,6 +107,7 @@ if ($total_reg > 0) {
 			<th class="centro">Pedido</th>	
 			<th class="centro">Cliente</th>	
 			<th class="esc centro">Local Entrega</th> 	
+			<th class="esc centro">Pedido</th> 	
 			<th class="esc centro">Entrega</th> 	
 			<th class="esc centro">Total</th> 	
 			<th class="esc centro">Pago</th> 	
@@ -154,6 +154,9 @@ HTML;
         $valor_entregaF = 'R$ ' . number_format($valor_entrega, 2, ',', '.');
         $data_pgtoF = implode('/', array_reverse(explode('-', $data_pgto)));
         $idF = str_pad($id, 2, '0', STR_PAD_LEFT);
+
+        $valor_pedido = $valor_entrega + $valor_compra;
+        $valor_pedidoF = 'R$ ' . number_format($valor_pedido, 2, ',', '.');
 
         $query2 = $pdo->query("SELECT * FROM usuarios where id = '$id_usuario_baixa'");
         $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
@@ -213,8 +216,9 @@ HTML;
 	</td>
 	<td class="centro">{$nome_cliente}</td>
 	<td class="esc centro">{$nome_bairro}</td>
-	<td class="esc centro">{$valor_entregaF}</td>
 	<td class="esc centro">{$valor_compraF}</td>
+	<td class="esc centro">{$valor_entregaF}</td>
+	<td class="esc centro">{$valor_pedidoF}</td>
 	<td class="esc centro">{$valor_pagoF}</td>
 	<td class="esc centro">{$trocoF}</td>
 	<td class="esc centro">{$tipo_pagamento}</td>

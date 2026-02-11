@@ -27,7 +27,9 @@ if (!$config) {
     $aberto             = $config[0]['estabelecimento_aberto'];
     $abertura           = $config[0]['abertura'];
     $fechamento         = $config[0]['fechamento'];
-    $texto_fechamento   = $config[0]['texto_fechamento'];
+    $texto_fecha_dia     = $config[0]['texto_fecha_dia'];
+    $texto_fecha_hora   = $config[0]['texto_fecha_hora'];
+    $texto_fecha_urg    = $config[0]['texto_fecha_urg'];
     $logotipo           = $config[0]['logotipo'];
     $icone              = $config[0]['icone'];
     $logo_rel           = $config[0]['logo_rel'];

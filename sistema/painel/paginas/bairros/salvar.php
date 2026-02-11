@@ -4,6 +4,7 @@ $tabela = 'bairros';
 $id = $_POST['id'];
 $nome = $_POST['nome'];
 $valor = $_POST['valor'];
+$status = $_POST['status'] ?? 'ativo';
 $valor = str_replace(['R$', '.', ','], ['', '', '.'], $valor);
 
 //Validar Nome
@@ -15,14 +16,18 @@ if (count($res) > 0 AND $id != $res[0]['id']) {
 }
 
 if ($id == "" || $id == null) {
-    // INSERT (novo registro)
-    $query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, valor = :valor");
+    $query = $pdo->prepare("INSERT INTO $tabela SET nome = :nome, 
+                                                    valor = :valor,
+                                                    status = :status");
 } else {
-    $query = $pdo->prepare("UPDATE $tabela SET nome = :nome, valor = :valor
-                                                    WHERE id = '$id'");
+    $query = $pdo->prepare("UPDATE $tabela SET nome = :nome, 
+                                               valor = :valor,
+                                               status = :status
+                                               WHERE id = '$id'");
 }
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":valor", "$valor");
+$query->bindValue(":status", "$status"); 
 $query->execute();
 echo 'Salvo com Sucesso';
 ?>

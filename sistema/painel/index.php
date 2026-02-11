@@ -50,7 +50,9 @@ $previsao_entrega   = $res_sistema[0]['previsao_entrega'];
 $aberto             = $res_sistema[0]['estabelecimento_aberto'];
 $abertura           = $res_sistema[0]['abertura'];
 $fechamento         = $res_sistema[0]['fechamento'];
-$texto_fechamento   = $res_sistema[0]['texto_fechamento'];
+$texto_fecha_dia    = $res_sistema[0]['texto_fecha_dia'];
+$texto_fecha_hora   = $res_sistema[0]['texto_fecha_hora'];
+$texto_fecha_urg    = $res_sistema[0]['texto_fecha_urg'];
 $logotipo           = $res_sistema[0]['logotipo'];
 $icone              = $res_sistema[0]['icone'];
 $logo_rel           = $res_sistema[0]['logo_rel'];
@@ -534,16 +536,21 @@ $dataMesInicial = $partes_inicial[1];
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="dev">Desenvolvedor</label>
                             <input type="text" class="form-control" id="dev" name="dev" value="<?php echo $desenvolvedor ?>">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="site">Site</label>
                             <input type="text" class="form-control" id="site" name="site" value="<?php echo $site_dev ?>">
                         </div>
-                        <div class="col-md-4">
-                            <label for="previsao" class="form-label">Previsão de Entrega (minutos)</label>
+                        <div class="col-md-3">
+                            <label for="url_sistema">URL para Relatório</label>
+                            <input type="text" class="form-control" id="url_sistema" name="url_sistema"
+                                value="<?php echo $url_sistema ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="previsao" class="form-label">Previsão de Entrega (min)</label>
                             <div class="input-group">
                                 <input type="number" class="form-control" id="previsao" name="previsao" value="<?php echo $previsao_entrega ?>" required min="1">
                                 <span class="input-group-text">min</span>
@@ -552,33 +559,22 @@ $dataMesInicial = $partes_inicial[1];
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="aberto">Estabelecimento</label>
-                            <select class="form-control" name="aberto">
-                                <option value="aberto" <?php if ($aberto == 'aberto') { ?> selected <?php } ?>>Aberto</option>
-                                <option value="fechado" <?php if ($aberto == 'fechado') { ?> selected <?php } ?>>Fechado</option>
-                            </select>
+                            <label for="txt_fecha_dia">Texto Fechamento (Dias)</label>
+                            <input type="text" class="form-control" id="txt_fecha_dia" name="txt_fecha_dia"
+                                value="<?php echo $texto_fecha_dia ?>">
                         </div>
                         <div class="col-md-4">
-                            <label for="abertura">Horário Abertura</label>
-                            <input type="time" class="form-control" id="abertura" name="abertura" value="<?php echo $abertura ?>">
+                            <label for="txt_fecha_urg">Texto Fechamento (Urgências)</label>
+                            <input type="text" class="form-control" id="txt_fecha_urg" name="txt_fecha_urg"
+                                value="<?php echo $texto_fecha_urg ?>">
                         </div>
                         <div class="col-md-4">
-                            <label for="fechamento">Horário Fechamento</label>
-                            <input type="time" class="form-control" id="fechamento" name="fechamento"
-                                value="<?php echo $fechamento ?>">
+                            <label for="chave_pix">Chave PIX</label>
+                            <input type="text" class="form-control" id="chave_pix" name="chave_pix"
+                                value="<?php echo $chave_pix ?>">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <label for="txt_fechamento">Texto Fechamento</label>
-                            <input type="text" class="form-control" id="txt_fechamento" name="txt_fechamento"
-                                value="<?php echo $texto_fechamento ?>">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="url_sistema">URL para Relatório</label>
-                            <input type="text" class="form-control" id="url_sistema" name="url_sistema"
-                                value="<?php echo $url_sistema ?>">
-                        </div>
                         <div class="col-md-2">
                             <label for="tipo_chave">Tipo de Chave</label>
                             <select class="form-control" name="tipo_chave">
@@ -589,10 +585,26 @@ $dataMesInicial = $partes_inicial[1];
                                 <option value="Codigo" <?php if ($tipo_chave == 'Codigo') { ?> selected <?php } ?>>Codigo</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <label for="chave_pix">Chave PIX</label>
-                            <input type="text" class="form-control" id="chave_pix" name="chave_pix"
-                                value="<?php echo $chave_pix ?>">
+                        <div class="col-md-2">
+                            <label for="aberto">Estabelecimento</label>
+                            <select class="form-control" name="aberto">
+                                <option value="Aberto" <?php if ($aberto == 'Aberto') { ?> selected <?php } ?>>Aberto</option>
+                                <option value="Fechado" <?php if ($aberto == 'Fechado') { ?> selected <?php } ?>>Fechado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="abertura">Horário Abre / </label>
+                            <input type="time" class="form-control" id="abertura" name="abertura" value="<?php echo $abertura ?>">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="fechamento"> Fecha</label>
+                            <input type="time" class="form-control" id="fechamento" name="fechamento"
+                                value="<?php echo $fechamento ?>">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txt_fecha_hora">Texto Fechamento (Horários)</label>
+                            <input type="text" class="form-control" id="txt_fecha_hora" name="txt_fecha_hora"
+                                value="<?php echo $texto_fecha_hora ?>">
                         </div>
                     </div>
                     <div class="row">

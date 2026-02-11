@@ -563,6 +563,15 @@ body {
   -webkit-transition:0.2s ease all;
 }
 
+.pequeno {
+  font-size: 11px;
+}
+
+.taxa-entrega {
+  color: red;
+  font-weight: bold;
+}
+
 @media (max-width:768px) {
   .card {
     padding: 5px;

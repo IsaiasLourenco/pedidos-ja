@@ -74,8 +74,8 @@ $total_ingredientes = $queryIng->fetch()['total'];
 
 $tem_adicionais_ou_ingredientes = ($total_adicionais > 0 || $total_ingredientes > 0);
 
-if ($aberto == "fechado") {
-    echo "<script>window.alert('$texto_fechamento')</script>";
+if ($aberto == "Fechado") {
+    echo "<script>window.alert('$texto_fecha_urg')</script>";
     echo "<script>window.location='index'</script>";
     exit;
 }
@@ -88,18 +88,17 @@ $dia_procurado      = $diasSemana[$diasSemana_numero];
 $query              = $pdo->query("SELECT * FROM dias WHERE dia = '$dia_procurado'");
 $res                = $query->fetchAll(PDO::FETCH_ASSOC);
 if (count($res) > 0) {
-    echo "<script>window.alert('$texto_fechamento')</script>";
+    echo "<script>window.alert('$texto_fecha_dia')</script>";
     echo "<script>window.location='index'</script>";
     exit;
 }
-
 //Verificar horário de funcionamento
-$hora_atual = date('H:i:s');
+$hora_atual = date('H:i');
 if (strtotime($fechamento) < strtotime($abertura)) {
     if (strtotime($hora_atual) >= strtotime($abertura) || strtotime($hora_atual) <= strtotime($fechamento)) {
         
     } else {
-        echo "<script>window.alert('$texto_fechamento   ')</script>";
+        echo "<script>window.alert('$texto_fecha_hora   ')</script>";
         echo "<script>window.location='index'</script>";
         exit;
     }
@@ -107,7 +106,7 @@ if (strtotime($fechamento) < strtotime($abertura)) {
     if (strtotime($hora_atual) >= strtotime($abertura) && strtotime($hora_atual) <= strtotime($fechamento)) {
         
     } else {
-        echo "<script>window.alert('$texto_fechamento')</script>";
+        echo "<script>window.alert('$texto_fecha_hora')</script>";
         echo "<script>window.location='index'</script>";
         exit;
     }

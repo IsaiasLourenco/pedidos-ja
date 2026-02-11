@@ -22,7 +22,9 @@ $previsao           = $_POST['previsao'];
 $aberto             = $_POST['aberto'];
 $abertura           = $_POST['abertura'];
 $fechamento         = $_POST['fechamento'];
-$txt_fechamento     = $_POST['txt_fechamento'];
+$texto_fecha_dia    = $_POST['txt_fecha_dia'];
+$texto_fecha_hora   = $_POST['txt_fecha_hora'];
+$texto_fecha_urg    = $_POST['txt_fecha_urg'];
 $url_sistema        = $_POST['url_sistema'];
 $tempo_atualizacao  = $_POST['tempo'];
 $tipo_chave         = $_POST['tipo_chave'];
@@ -131,7 +133,9 @@ $query = $pdo->prepare("UPDATE config SET nome_sistema              = :nome,
                                             estabelecimento_aberto  = :estabelecimento_aberto,
                                             abertura                = :abertura,
                                             fechamento              = :fechamento,
-                                            texto_fechamento        = :texto_fechamento,
+                                            texto_fecha_dia         = :texto_fecha_dia,
+                                            texto_fecha_hora        = :texto_fecha_hora,
+                                            texto_fecha_urg         = :texto_fecha_urg,
                                             logotipo                = '$logotipo',
                                             icone                   = '$icone',
                                             logo_rel                = '$logo_rel',
@@ -161,7 +165,9 @@ $query->bindValue(":previsao_entrega", "$previsao");
 $query->bindValue(":estabelecimento_aberto", "$aberto");
 $query->bindValue(":abertura", "$abertura");
 $query->bindValue(":fechamento", "$fechamento");
-$query->bindValue(":texto_fechamento", "$txt_fechamento");
+$query->bindValue(":texto_fecha_dia", "$texto_fecha_dia");
+$query->bindValue(":texto_fecha_hora", "$texto_fecha_hora");
+$query->bindValue(":texto_fecha_urg", "$texto_fecha_urg");
 $query->bindValue(":url_sistema", "$url_sistema");
 $query->bindValue(":tempo_atualizacao", "$tempo_atualizacao");
 $query->bindValue(":tipo_chave", "$tipo_chave");
